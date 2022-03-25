@@ -6,4 +6,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CityListViewModel @Inject constructor() : BaseViewModel() {
+
+    fun search(query: String) {
+    }
 }
