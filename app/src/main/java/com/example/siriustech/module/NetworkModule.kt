@@ -29,7 +29,7 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideCheckerInterceptor(@ApplicationContext context: Context) =
-        ChuckerInterceptor.Builder(context).maxContentLength(50000L).build()
+        ChuckerInterceptor.Builder(context).maxContentLength(500000L).build()
 
 
     @Provides

@@ -15,5 +15,8 @@ data class CityListUi(
     ) {
         val displayCityName
             get() = "$name, $country"
+
+        val displayLatitudeAndLongitude
+            get() = "($latitude, $longitude)"
     }
 }

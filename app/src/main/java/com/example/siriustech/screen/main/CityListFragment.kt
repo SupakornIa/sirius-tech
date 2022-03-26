@@ -13,7 +13,6 @@ import com.example.siriustech.BR
 import com.example.siriustech.R
 import com.example.siriustech.base.BaseFragment
 import com.example.siriustech.databinding.FragmentCityListBinding
-import com.example.siriustech.screen.main.controller.CityListController
 import com.example.siriustech.screen.main.controller.CityListDataAdapter
 import com.example.siriustech.screen.main.controller.LoadingStateAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,10 +22,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class CityListFragment : BaseFragment<CityListViewModel, FragmentCityListBinding>() {
-
-    @Inject
-    lateinit var controller: CityListController
-
     @Inject
     lateinit var cityListDataAdapter: CityListDataAdapter
 

@@ -11,10 +11,9 @@ class CityModelViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(city: CityListUi.CityUi?) {
-        city?.let {
-            binding.name = "${it.name}, ${it.country} "
-            binding.executePendingBindings()
-        }
+        city?.let(binding::setCity)
+
+        binding.executePendingBindings()
 
         binding.root.setOnClickListener { city?.onClick?.invoke() }
     }

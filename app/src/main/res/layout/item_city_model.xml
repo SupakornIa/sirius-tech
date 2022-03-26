@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="name"
-            type="String" />
+            name="city"
+            type="com.example.siriustech.screen.main.model.CityListUi.CityUi" />
 
     </data>
 
@@ -17,14 +17,22 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text_view"
+            android:id="@+id/text_view_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{name}"
+            android:text="@{city.displayCityName}"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
             tools:text="city" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{city.displayLatitudeAndLongitude}"
+            android:textColor="@color/black"
+            tools:text="1,2" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

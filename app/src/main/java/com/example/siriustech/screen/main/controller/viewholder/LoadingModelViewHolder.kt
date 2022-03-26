@@ -9,7 +9,7 @@ class LoadingModelViewHolder(private val binding: ItemLoadingModelBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind() {
-
+        //We can bind in case there are condition to show or hide at footer
     }
 
     companion object {
