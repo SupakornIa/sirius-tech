@@ -1,5 +1,5 @@
 package com.example.siriustech.data
 
 interface Mapper<E, D> {
-    fun map(input: E): D
+    suspend fun map(input: E): D
 }

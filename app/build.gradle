@@ -63,9 +63,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     //Epoxy Controller
-    implementation "com.airbnb.android:epoxy:4.5.0"
-    implementation "com.airbnb.android:epoxy-databinding:4.5.0"
-    kapt "com.airbnb.android:epoxy-processor:4.5.0"
+    implementation "com.airbnb.android:epoxy:4.6.4"
+    implementation "com.airbnb.android:epoxy-databinding:4.6.4"
+    implementation "com.airbnb.android:epoxy-paging3:4.6.4"
+    kapt "com.airbnb.android:epoxy-processor:4.6.4"
 
     // Navigation Component
     implementation 'androidx.navigation:navigation-fragment-ktx:2.4.1'

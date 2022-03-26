@@ -12,8 +12,19 @@ class CityRepositoryImpl @Inject constructor(
     private val cityResponseMapper: CityResponseMapper
 ) : CityRepository {
 
+    var cityList: CityList? = null
+
     override suspend fun getCities(): CityList {
-        return cityResponseMapper.map(service.getCities())
+        if (cityList != null) return cityList.orEmpty()
+
+        cityList = cityResponseMapper.map(service.getCities())
+        return cityList.orEmpty()
     }
+
+    override suspend fun getCities(page: Int, query: String) {
+
+    }
+
+    private fun CityList?.orEmpty() = this ?: CityList(emptyList())
 
 }

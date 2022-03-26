@@ -3,6 +3,7 @@ package com.example.siriustech.screen.main
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.siriustech.BR
@@ -10,7 +11,10 @@ import com.example.siriustech.R
 import com.example.siriustech.base.BaseFragment
 import com.example.siriustech.databinding.FragmentCityListBinding
 import com.example.siriustech.screen.main.controller.CityListController
+import com.example.siriustech.screen.main.controller.CityListDataAdapter
+import com.example.siriustech.screen.main.controller.LoadingStateAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -19,6 +23,9 @@ class CityListFragment : BaseFragment<CityListViewModel, FragmentCityListBinding
 
     @Inject
     lateinit var controller: CityListController
+
+    @Inject
+    lateinit var cityListDataAdapter: CityListDataAdapter
 
     override val viewModel: CityListViewModel by viewModels()
 
@@ -45,22 +52,22 @@ class CityListFragment : BaseFragment<CityListViewModel, FragmentCityListBinding
     private fun setupRecyclerView() {
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-            adapter = controller.adapter
-
-            addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                    super.onScrollStateChanged(recyclerView, newState)
-
-                    if (!recyclerView.canScrollVertically(1)) {
-                        //fetchNextPage()
-                    }
-                }
-            })
+            adapter = cityListDataAdapter.withLoadStateFooter(LoadingStateAdapter())
         }
     }
 
+
     override fun initViewModel() {
-        controller.setData(Unit)
+        viewModel.searchEfficiencyTimeConsumeDisplayLiveData.observe(
+            viewLifecycleOwner,
+            binding.textViewTimeConsume::setText
+        )
+
+        viewModel.pagingDataLiveData.observe(viewLifecycleOwner) { pagingData ->
+            viewLifecycleOwner.lifecycleScope.launch {
+                cityListDataAdapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
+            }
+        }
     }
 
 }
