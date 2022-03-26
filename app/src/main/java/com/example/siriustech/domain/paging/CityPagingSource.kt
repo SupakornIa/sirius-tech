@@ -16,13 +16,13 @@ class CityPagingSource constructor(
 
     var currentQuery: String? = null
 
-
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, City> {
         val position = params.key ?: STARTING_PAGE_INDEX
 
         // Start counting time  for searching algorithm
         val startTimeCountMillis = System.currentTimeMillis()
 
+        // find range from query
         val indexRange = BinarySearchUtil.findRange(
             query = query,
             binarySearches = cityList.cities
@@ -33,6 +33,7 @@ class CityPagingSource constructor(
             else -> indexRange.second - indexRange.first + 1
         }
 
+        // use indexRange to find page range. the index will be retrieved according to page size
         val pageRange = BinarySearchUtil.findPageRange(
             currentPage = position,
             pageSize = params.loadSize,

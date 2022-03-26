@@ -56,6 +56,8 @@ class CityListFragment : BaseFragment<CityListViewModel, FragmentCityListBinding
 
 
     override fun initViewModel() {
+        viewModel.search("")
+
         Transformations.distinctUntilChanged(viewModel.queryLiveData).observe(viewLifecycleOwner) {
             binding.recyclerView.scrollToPosition(0)
         }

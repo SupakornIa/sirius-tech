@@ -13,15 +13,18 @@ object BinarySearchUtil {
 
     /**
      * [findPageRange] is used to find the range for [currentPage]
-     * @param currentPage is the current page.
+     * @param currentPage is the current page. It will start with 1.
      * @param pageSize is the size of page that we need to fetch each time.
-     * @param range is the value that indicate the start and end length of the [BinarySearchModel] list.
+     * @param range is the value that indicate the start and end length of
+     * the [BinarySearchModel] list.
      */
     fun findPageRange(
         currentPage: Int,
         pageSize: Int,
         range: Pair<Int, Int>
     ): Pair<Int, Int> {
+        if (range.isOutOfRange()) return range
+
         val firstIndex = range.first
         val lastIndex = range.second
 
@@ -30,7 +33,7 @@ object BinarySearchUtil {
         val lastIndexInCurrentPage = when {
             firstIndexInCurrentPage > lastIndex -> lastIndex
             firstIndexInCurrentPage + pageSize > lastIndex -> lastIndex
-            else -> firstIndexInCurrentPage + pageSize
+            else -> firstIndexInCurrentPage + pageSize - 1
         }
 
         return firstIndexInCurrentPage to lastIndexInCurrentPage
