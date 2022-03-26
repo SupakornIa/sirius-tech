@@ -1,11 +1,9 @@
 package com.example.siriustech.screen.main.controller
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.siriustech.databinding.ItemCityModelBinding
 import com.example.siriustech.screen.main.controller.viewholder.CityModelViewHolder
 import com.example.siriustech.screen.main.model.CityListUi
 import dagger.hilt.android.scopes.FragmentScoped
@@ -41,13 +39,7 @@ class CityListDataAdapter @Inject constructor() :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return CityModelViewHolder(
-            ItemCityModelBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
+        return CityModelViewHolder.create(parent)
     }
 
 }

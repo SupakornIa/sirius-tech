@@ -8,6 +8,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
 import com.example.siriustech.base.BaseViewModel
+import com.example.siriustech.base.MutableConsumableLiveEvent
 import com.example.siriustech.domain.GetCityUseCase
 import com.example.siriustech.domain.entity.City
 import com.example.siriustech.screen.main.model.CityListUi
@@ -27,6 +28,8 @@ class CityListViewModel @Inject constructor(
     val queryLiveData = MutableLiveData<String>()
     val isLoadingLiveData = MutableLiveData<Boolean>()
     val searchEfficiencyTimeConsumeDisplayLiveData = MutableLiveData<String>()
+
+    val onClickCityLiveEvent = MutableConsumableLiveEvent<Pair<Double?, Double?>>()
 
     fun search(query: String) {
         if (queryLiveData.value == query) return
@@ -73,7 +76,10 @@ class CityListViewModel @Inject constructor(
                 name = it.name,
                 country = it.country,
                 latitude = it.coord?.lat,
-                longitude = it.coord?.lon
+                longitude = it.coord?.lon,
+                onClick = {
+                    onClickCityLiveEvent.value = it.coord?.lat to it.coord?.lon
+                }
             )
         }
     }

@@ -1,8 +1,11 @@
 package com.example.siriustech.screen.main
 
+import android.content.Intent
+import android.net.Uri
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -58,6 +61,16 @@ class CityListFragment : BaseFragment<CityListViewModel, FragmentCityListBinding
 
 
     override fun initViewModel() {
+        Transformations.distinctUntilChanged(viewModel.queryLiveData).observe(viewLifecycleOwner) {
+            binding.recyclerView.scrollToPosition(0)
+        }
+
+        viewModel.onClickCityLiveEvent.observeSingle(viewLifecycleOwner) { (latitude, longitude) ->
+            if (latitude != null && longitude != null) {
+                navigateToMap(latitude, longitude)
+            }
+        }
+
         viewModel.searchEfficiencyTimeConsumeDisplayLiveData.observe(
             viewLifecycleOwner,
             binding.textViewTimeConsume::setText
@@ -68,6 +81,15 @@ class CityListFragment : BaseFragment<CityListViewModel, FragmentCityListBinding
                 cityListDataAdapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
             }
         }
+    }
+
+    private fun navigateToMap(latitude: Double, longitude: Double) {
+        Intent(Intent.ACTION_VIEW, Uri.parse("geo:$latitude,$longitude")).apply {
+            setClassName(
+                "com.google.android.apps.maps",
+                "com.google.android.maps.MapsActivity"
+            )
+        }.run(::startActivity)
     }
 
 }

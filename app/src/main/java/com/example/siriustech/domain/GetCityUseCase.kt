@@ -41,7 +41,7 @@ class GetCityUseCase @Inject constructor(
     )
 
     companion object {
-        const val PRE_FETCH_DISTANCE = 25
+        const val PRE_FETCH_DISTANCE = 40
         const val PAGE_SIZE = 100
     }
 }
