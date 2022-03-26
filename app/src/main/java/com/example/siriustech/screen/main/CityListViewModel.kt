@@ -42,7 +42,7 @@ class CityListViewModel @Inject constructor(
         isLoadingLiveData.value = true
         getCityUseCase.searchEfficiencyTimeConsume = { recordsFound, timeConsumeMillis ->
             searchEfficiencyTimeConsumeDisplayLiveData.value =
-                "$recordsFound records found in $timeConsumeMillis milliseconds."
+                "$recordsFound records found in $timeConsumeMillis seconds."
         }
         getCityUseCase.execute(GetCityUseCase.Input(query = query))
             .onSuccess(::onFetchSuccess)
