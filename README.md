@@ -1,7 +1,7 @@
 # sirius-tech
 
 You can check the search algorithm in **BinarySearchUtil.kt** and the performance of searching is better than linear (n) for sure.
-for my calculation is about. and I also provide the unit test for the binary seach as well. you can found it in **BinarySearchUtilTest.kt**
+from my calculation for filter algorithm ≈ Log(n). and I also provide the unit test for the binary search as well. you can found it in **BinarySearchUtilTest.kt**
 
 
 1. query = i times <br>
